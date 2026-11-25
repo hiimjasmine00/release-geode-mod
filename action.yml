@@ -94,7 +94,7 @@ runs:
 
     - name: Update Tag
       if: ${{ inputs.replace == 'true' }}
-      uses: actions/github-script@v7
+      uses: actions/github-script@v9
       env:
         VERSION: v${{ steps.version.outputs.version }}
       with:
@@ -141,7 +141,7 @@ runs:
 
     - name: Download Build Output
       if: ${{ inputs.replace == 'true' || steps.check.outputs.release == 'true' }}
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v7
       with:
         github-token: ${{ inputs.token }}
         merge-multiple: true
@@ -151,7 +151,7 @@ runs:
     - name: Release Version
       id: release
       if: ${{ inputs.replace == 'true' || steps.check.outputs.release == 'true' }}
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       env:
         GITHUB_TOKEN: ${{ inputs.token }}
       with:
